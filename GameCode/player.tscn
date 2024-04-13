@@ -55,4 +55,8 @@ shape = SubResource("CapsuleShape2D_vy1dd")
 sprite_frames = SubResource("SpriteFrames_677uw")
 animation = &"walk"
 
+[node name="debug_message" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

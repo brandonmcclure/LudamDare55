@@ -1,7 +1,7 @@
 extends Area2D
 
 signal hit
-
+var _debug = false
 @export var speed = 400 # How fast the player will move (pixels/sec).
 var screen_size # Size of the game window.
 var velocity
@@ -10,17 +10,22 @@ var target_destination = null
 func _ready():
 	screen_size = get_viewport_rect().size
 	velocity = Vector2.ZERO
+	if _debug:
+		var debug_message = get_node("debug_message")
+		debug_message.text = 'test'
 	hide()
 
 func _input(event):
 # Mouse in viewport coordinates.
-	if not event is InputEventMouseButton:
-		return
-	#print("Mouse Click/Unclick at: ", event.position)
-	target_destination = event.position
-	print('set the dest: ', event.position)
-	#elif event is InputEventMouseMotion:
-		#print("Mouse Motion at: ", event.position)
+	if _debug:
+		var debug_message = get_node("debug_message")
+		#debug_message.text = typeof(event)
+	if event is InputEventMouseButton or event is InputEventScreenTouch:
+		#print("Mouse Click/Unclick at: ", event.position)
+		target_destination = event.position
+		print('set the dest: ', event.position)
+		#elif event is InputEventMouseMotion:
+			#print("Mouse Motion at: ", event.position)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if target_destination != null:
