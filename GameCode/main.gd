@@ -2,6 +2,7 @@ extends Node
 
 @export var mob_scene: PackedScene
 var score
+var ff_disable_mobs = true
 
 # Called when the node enters the scene tree for the first time.
 #func _ready():
@@ -30,6 +31,8 @@ func _on_start_timer_timeout():
 	$MobTimer.start()
 	$ScoreTimer.start()
 func _on_mob_timer_timeout():
+	if ff_disable_mobs:
+		return
 	# Create a new instance of the Mob scene.
 	var mob = mob_scene.instantiate()
 
