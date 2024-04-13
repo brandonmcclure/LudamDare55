@@ -1,11 +1,13 @@
 extends Node
 
 @export var mob_scene: PackedScene
+@export var num_of_concurrent_enemies = 0
+@export var max_score = 10
 var score
 var ff_disable_mobs = false
 var ff_disable_music = false
 
-var num_of_concurrent_enemies = 999
+
 var _num_of_current_enemies = 0
 var bg_music := AudioStreamPlayer.new()
 
@@ -18,6 +20,8 @@ func _ready():
 	add_child(bg_music)
 
 	bg_music.play()
+	
+	$HUD.max_score = max_score
 	#	new_game()
 
 
@@ -30,6 +34,11 @@ func game_over():
 	$ScoreTimer.stop()
 	$MobTimer.stop()
 	$HUD.show_game_over()
+func game_win():
+	bg_music.stop()
+	$ScoreTimer.stop()
+	$MobTimer.stop()
+	$HUD.show_game_win()
 func new_game():
 	if not bg_music.playing:
 		bg_music.play()
@@ -40,6 +49,8 @@ func new_game():
 	$HUD.update_score(score)
 func _on_score_timer_timeout():
 	score += 1
+	if score >= max_score:
+		game_win()
 	$HUD.update_score(score)
 
 func _on_start_timer_timeout():

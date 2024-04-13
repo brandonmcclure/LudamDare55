@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+@export var max_score: int
+
 # Notifies `Main` node that the button has been pressed
 signal start_game
 
@@ -17,10 +19,21 @@ func show_game_over():
 	$Message.text = intro_text
 	$Message.show()
 	# Make a one-shot timer and wait for it to finish.
-	await get_tree().create_timer(1.0).timeout
+	await get_tree().create_timer(5.0).timeout
+	$StartButton.show()
+func show_game_win():
+	show_message("You were able to get enough followers to be summoned! Enjoy your new life!")
+	# Wait until the MessageTimer has counted down.
+	await $MessageTimer.timeout
+
+	$Message.text = intro_text
+	$Message.show()
+	# Make a one-shot timer and wait for it to finish.
+	await get_tree().create_timer(5.0).timeout
 	$StartButton.show()
 func update_score(score):
 	$ScoreLabel.text = str(score)
+	$summon_progress/TextureProgressBar.value = score  * 100 / max_score
 func _on_start_button_pressed():
 	$StartButton.hide()
 	$Message.hide()
