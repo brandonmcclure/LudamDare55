@@ -279,7 +279,7 @@ position = Vector2(531, -36)
 rotation = 1.5708
 
 [node name="possesable" parent="." instance=ExtResource("6_vli67")]
-position = Vector2(334, 134)
+position = Vector2(240, 324)
 
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]

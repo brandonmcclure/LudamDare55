@@ -6,6 +6,7 @@ var _debug = false
 var screen_size # Size of the game window.
 var velocity
 var target_destination = null
+var number_currently_possesed = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	screen_size = get_viewport_rect().size
@@ -23,7 +24,7 @@ func _input(event):
 	if event is InputEventMouseButton or event is InputEventScreenTouch:
 		#print("Mouse Click/Unclick at: ", event.position)
 		target_destination = event.position
-		print('set the dest: ', event.position)
+		#print('set the dest: ', event.position)
 		#elif event is InputEventMouseMotion:
 			#print("Mouse Motion at: ", event.position)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -78,5 +79,7 @@ func _on_body_entered(body):
 	if body.is_in_group("Enemy"):
 		invoke_death()
 	if body.is_in_group("possesable"):
-		print('posses')
+		if(body.invoke_possession()):
+			number_currently_possesed = number_currently_possesed + 1
+			print('posses ', number_currently_possesed)
 

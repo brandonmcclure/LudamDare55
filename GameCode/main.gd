@@ -4,6 +4,7 @@ extends Node
 @export var num_of_concurrent_enemies = 0
 @export var max_score = 10
 var score
+var play_time = 0
 var ff_disable_mobs = false
 var ff_disable_music = false
 
@@ -48,6 +49,10 @@ func new_game():
 	$StartTimer.start()
 	$HUD.update_score(score)
 func _on_score_timer_timeout():
+	play_time += 1
+	$HUD.update_time(play_time)
+	if $player.number_currently_possesed == 0:
+		return
 	score += 1
 	if score >= max_score:
 		game_win()

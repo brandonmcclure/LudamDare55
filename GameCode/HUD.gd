@@ -31,6 +31,8 @@ func show_game_win():
 	# Make a one-shot timer and wait for it to finish.
 	await get_tree().create_timer(5.0).timeout
 	$StartButton.show()
+func update_time(timer):
+	$TimerLabel.text = str(timer)
 func update_score(score):
 	$ScoreLabel.text = str(score)
 	$summon_progress/TextureProgressBar.value = score  * 100 / max_score
