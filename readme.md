@@ -2,6 +2,8 @@
 
 Theme is summoning
 
+<https://ludamdare.themongoose.xyz/>
+
 ## Ideas
 
 - You summon ghosts to defend against medieval serfs and then knights

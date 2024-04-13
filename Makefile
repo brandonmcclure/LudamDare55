@@ -7,8 +7,8 @@ getbranchname:
 	$(eval BRANCH_NAME = $(shell echo "$$(git branch --show-current)" | sed 's/\//./g'))
 
 REGISTRY_NAME := forgejo.themongoose.xyz/
-REPOSITORY_NAME := mcd/
-IMAGE_NAME := godot_tutorial
+REPOSITORY_NAME := brandon/
+IMAGE_NAME := ludamdare55
 TAG := :latest
 
 build:
@@ -17,9 +17,11 @@ build_docker: getcommitid getbranchname
 	docker build -t $(REGISTRY_NAME)$(REPOSITORY_NAME)$(IMAGE_NAME)$(TAG) -t $(REGISTRY_NAME)$(REPOSITORY_NAME)$(IMAGE_NAME):$(BRANCH_NAME) -t $(REGISTRY_NAME)$(REPOSITORY_NAME)$(IMAGE_NAME):$(BRANCH_NAME)_$(COMMITID) .
 
 
-run_docker: build_docker
-	docker run -d -p 8080:80 $(REGISTRY_NAME)$(REPOSITORY_NAME)$(IMAGE_NAME)$(TAG)
-	
+run_docker: build_docker clean
+	docker run -d -p 8080:80 --name ludamdare55 $(REGISTRY_NAME)$(REPOSITORY_NAME)$(IMAGE_NAME)$(TAG)
+clean:
+	-docker stop ludamdare55
+	-docker rm ludamdare55	
 py_serve:
 	python serve.py --root ./GameCode/bin/.
 build:
