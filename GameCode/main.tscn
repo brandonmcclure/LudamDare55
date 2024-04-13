@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://dl2utvscqsb6d"]
+[gd_scene load_steps=10 format=3 uid="uid://dl2utvscqsb6d"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_acp56"]
 [ext_resource type="PackedScene" uid="uid://b244yopiiy3u8" path="res://mob.tscn" id="2_8yt82"]
 [ext_resource type="PackedScene" uid="uid://1uke5wj3cffe" path="res://hud.tscn" id="3_l1gmm"]
 [ext_resource type="PackedScene" uid="uid://2t7wlwxekldb" path="res://player.tscn" id="3_p36w8"]
 [ext_resource type="Texture2D" uid="uid://dtj3mcbmlypyk" path="res://art/tilesheet.png" id="5_uh3g3"]
+[ext_resource type="PackedScene" uid="uid://bq2q5tuxi67pt" path="res://possesable.tscn" id="6_vli67"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vwy61"]
 texture = ExtResource("5_uh3g3")
@@ -275,6 +276,9 @@ curve = SubResource("Curve2D_cg02n")
 [node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath"]
 position = Vector2(531, -36)
 rotation = 1.5708
+
+[node name="possesable" parent="." instance=ExtResource("6_vli67")]
+position = Vector2(334, 134)
 
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]
