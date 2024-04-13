@@ -3,7 +3,7 @@ extends CanvasLayer
 # Notifies `Main` node that the button has been pressed
 signal start_game
 
-var intro_text = "You have been wandering for as long as you can remember. You are what they call a ghost. Your goal is to gather a following of the living who will summon you back into your physical form. It will be difficult, because in your current state you cannot interact very well with their world. Good luck"
+var intro_text = "You have been wandering for as long as you can remember. You are what they call a ghost. Your goal is to gather a following of the living who will summon you back into your physical form. Watch out for the inquisitors dressed in white. It will be difficult, because in your current state you cannot interact very well with their world. Try to survive as long as you can, Good luck"
 
 func show_message(text):
 	$Message.text = text

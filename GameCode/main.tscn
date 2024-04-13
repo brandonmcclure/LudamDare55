@@ -238,7 +238,7 @@ sources/0 = SubResource("TileSetAtlasSource_vwy61")
 
 [sub_resource type="Curve2D" id="Curve2D_cg02n"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 471, 5, 0, 0, 0, 0, 475, 718, 0, 0, 0, 0, 2, 714, 0, 0, 0, 0, -6, 5, 0, 0, 0, 0, 471, 5)
+"points": PackedVector2Array(0, 0, 0, 0, 531, -36, 0, 0, 0, 0, 531, 726, 0, 0, 0, 0, -2.38384, 725.057, 0, 0, 0, 0, -1.4798, -28.4554, 0, 0, 0, 0, 530.096, -34.1139)
 }
 point_count = 5
 
@@ -268,11 +268,13 @@ position = Vector2(240, 450)
 [node name="player" parent="." instance=ExtResource("3_p36w8")]
 
 [node name="MobPath" type="Path2D" parent="."]
+position = Vector2(-56.3631, 2.17323)
+scale = Vector2(1.10615, 1.06037)
 curve = SubResource("Curve2D_cg02n")
 
 [node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath"]
-position = Vector2(471, 5)
-rotation = 1.56519
+position = Vector2(531, -36)
+rotation = 1.5708
 
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
 [connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]

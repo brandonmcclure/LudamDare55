@@ -3,20 +3,36 @@ extends Node
 @export var mob_scene: PackedScene
 var score
 var ff_disable_mobs = false
+var ff_disable_music = false
+
+var num_of_concurrent_enemies = 999
+var _num_of_current_enemies = 0
+var bg_music := AudioStreamPlayer.new()
 
 # Called when the node enters the scene tree for the first time.
-#func _ready():
+func _ready():
+	bg_music.stream = load("res://art/background2.ogg")
+	bg_music.stream_paused = true
+	bg_music.autoplay = false
+	
+	add_child(bg_music)
+
+	bg_music.play()
 	#	new_game()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	_num_of_current_enemies = get_tree().get_nodes_in_group("mobs")
 	pass
 func game_over():
+	bg_music.stop()
 	$ScoreTimer.stop()
 	$MobTimer.stop()
 	$HUD.show_game_over()
 func new_game():
+	if not bg_music.playing:
+		bg_music.play()
 	get_tree().call_group("mobs", "queue_free")
 	score = 0
 	$player.start($StartPosition.position)
@@ -32,6 +48,9 @@ func _on_start_timer_timeout():
 func _on_mob_timer_timeout():
 	if ff_disable_mobs:
 		return
+	if num_of_concurrent_enemies <= _num_of_current_enemies.size():
+		return
+	#print('spawning a mob')		
 	# Create a new instance of the Mob scene.
 	var mob = mob_scene.instantiate()
 
