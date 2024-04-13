@@ -1,0 +1,5 @@
+**/megalinter-reports/*
+.act/*
+
+GameCode/bin/*
+.venv/*
