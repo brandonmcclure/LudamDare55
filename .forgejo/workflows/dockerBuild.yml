@@ -24,7 +24,7 @@ on:
 
 env:
   REGISTRY: forgejo.themongoose.xyz/brandon/
-  IMAGE_NAME: godot_tutorial
+  IMAGE_NAME: ludamdare55
 
 jobs:
   build-and-push-image:
