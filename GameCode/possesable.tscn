@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://bq2q5tuxi67pt"]
+[gd_scene load_steps=7 format=3 uid="uid://bq2q5tuxi67pt"]
 
+[ext_resource type="Script" path="res://possesable.gd" id="1_53smn"]
 [ext_resource type="Texture2D" uid="uid://dtj3mcbmlypyk" path="res://art/tilesheet.png" id="1_u8fpx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1kxnw"]
@@ -33,12 +34,18 @@ animations = [{
 radius = 31.0
 height = 74.0
 
-[node name="possesable" type="RigidBody2D"]
-collision_layer = 8
+[node name="possesable" type="RigidBody2D" groups=["possesable"]]
+collision_layer = 4
+collision_mask = 2
 gravity_scale = 0.0
+max_contacts_reported = 1
+contact_monitor = true
+script = ExtResource("1_53smn")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_10gmc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_rxoi6")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

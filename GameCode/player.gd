@@ -46,10 +46,15 @@ func start(pos):
 	position = pos
 	show()
 	$CollisionShape2D.disabled = false
-
-func _on_body_entered(body):
+func invoke_death():
 	hide() # Player disappears after being hit.
 	hit.emit()
 	# Must be deferred as we can't change physics properties on a physics callback.
 	$CollisionShape2D.set_deferred("disabled", true)
+	
+func _on_body_entered(body):	
+	if body.is_in_group("Enemy"):
+		invoke_death()
+	if body.is_in_group("possesable"):
+		print('posses')
 
