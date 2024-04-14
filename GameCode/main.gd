@@ -1,8 +1,10 @@
 extends Node
 
+signal timer
+
 @export var mob_scene: PackedScene
-@export var num_of_concurrent_enemies = 0
-@export var max_score = 10
+@export var num_of_concurrent_enemies = 10
+@export var max_score = 100
 var score
 var play_time = 0
 var ff_disable_mobs = false
@@ -19,8 +21,8 @@ func _ready():
 	bg_music.autoplay = false
 	
 	add_child(bg_music)
-
-	bg_music.play()
+	if not ff_disable_music:
+		bg_music.play()
 	
 	$HUD.max_score = max_score
 	#	new_game()
@@ -30,25 +32,14 @@ func _ready():
 func _process(delta):
 	_num_of_current_enemies = get_tree().get_nodes_in_group("mobs")
 	pass
-func game_over():
-	bg_music.stop()
-	$ScoreTimer.stop()
-	$MobTimer.stop()
-	$HUD.show_game_over()
+
 func game_win():
 	bg_music.stop()
 	$ScoreTimer.stop()
 	$MobTimer.stop()
-	$HUD.show_game_win()
-func new_game():
-	if not bg_music.playing:
-		bg_music.play()
-	get_tree().call_group("mobs", "queue_free")
-	score = 0
-	$player.start($StartPosition.position)
-	$StartTimer.start()
-	$HUD.update_score(score)
+	$HUD.set_state(4)
 func _on_score_timer_timeout():
+	timer.emit()
 	play_time += 1
 	$HUD.update_time(play_time)
 	if $player.number_currently_possesed == 0:
@@ -94,4 +85,18 @@ func _on_mob_timer_timeout():
 
 
 func _on_player_hit():
-	game_over()
+	bg_music.stop()
+	$ScoreTimer.stop()
+	$MobTimer.stop()
+	$HUD.set_state(3)
+
+
+func _on_hud_state_start_play():
+	
+	if not bg_music.playing and not ff_disable_music:
+		bg_music.play()
+	get_tree().call_group("mobs", "queue_free")
+	score = 0
+	$player.start($StartPosition.position)
+	$StartTimer.start()
+	$HUD.update_score(score)

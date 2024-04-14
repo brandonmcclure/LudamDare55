@@ -12,6 +12,9 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	# screen_size.x
+	if position.x < -(screen_size.x) or position.y < -(screen_size.y): 
+		queue_free()
 	var velocity = Vector2.ZERO # The player's movement vector.
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
@@ -29,7 +32,7 @@ func _process(delta):
 		$AnimatedSprite2D.flip_v = velocity.y > 0
 	
 	position += velocity * delta
-	position = position.clamp(Vector2.ZERO, screen_size)
+	#position = position.clamp(Vector2.ZERO, screen_size)
 	pass
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	print('mob is off the screen')
