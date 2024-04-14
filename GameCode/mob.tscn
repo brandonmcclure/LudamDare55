@@ -19,7 +19,7 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_feadq"]
-radius = 9.77011
+radius = 9.7701
 height = 19.5402
 
 [node name="Mob" type="RigidBody2D" groups=["Enemy"]]
