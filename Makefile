@@ -18,7 +18,7 @@ build_docker: getcommitid getbranchname
 
 
 run_docker: build_docker clean
-	docker run -d -p 8080:80 --name ludamdare55 $(REGISTRY_NAME)$(REPOSITORY_NAME)$(IMAGE_NAME)$(TAG)
+	docker run -d -p 127.0.0.1:5935:80 --name ludamdare55 $(REGISTRY_NAME)$(REPOSITORY_NAME)$(IMAGE_NAME)$(TAG)
 clean:
 	-docker stop ludamdare55
 	-docker rm ludamdare55	
