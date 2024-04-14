@@ -10,7 +10,7 @@ signal state_start_pause_menu
 signal state_start_game_over
 signal state_start_game_win
 
-var intro_text = "You have been wandering for as long as you can remember, you remember long ago being called a ghost. Your goal is to gather a following of the Godot Bots who will summon you back into your physical form. Watch out for the inquisitors dressed in white. It will be difficult, because in your current state you cannot interact very well with their world, and you will need to stay near the Godot Bots to keep influence with them. Try to survive as long as you can, Good luck."
+var intro_text = "You have been wandering for as long as you can remember, you remember long ago being called a ghost. Your goal is to gather a following of the blue peasants who will summon you back into your physical form. Watch out for the inquisitors dressed in white. It will be difficult, because in your current state you cannot interact very well with their world, and you will need to stay near the blue peasants to keep influence with them. Try to survive as long as you can, Good luck."
 
 func show_message(text):
 	$Message.text = text
