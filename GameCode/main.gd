@@ -32,16 +32,12 @@ func _ready():
 func _process(delta):
 	_num_of_current_enemies = get_tree().get_nodes_in_group("mobs")
 	pass
-func game_over():
-	bg_music.stop()
-	$ScoreTimer.stop()
-	$MobTimer.stop()
-	$HUD.set_state(1)
+
 func game_win():
 	bg_music.stop()
 	$ScoreTimer.stop()
 	$MobTimer.stop()
-	$HUD.show_game_win()
+	$HUD.set_state(4)
 func _on_score_timer_timeout():
 	timer.emit()
 	play_time += 1
@@ -89,10 +85,14 @@ func _on_mob_timer_timeout():
 
 
 func _on_player_hit():
-	game_over()
+	bg_music.stop()
+	$ScoreTimer.stop()
+	$MobTimer.stop()
+	$HUD.set_state(3)
 
 
 func _on_hud_state_start_play():
+	
 	if not bg_music.playing and not ff_disable_music:
 		bg_music.play()
 	get_tree().call_group("mobs", "queue_free")
