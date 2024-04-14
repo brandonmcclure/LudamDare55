@@ -4,7 +4,7 @@ signal timer
 
 @export var mob_scene: PackedScene
 @export var num_of_concurrent_enemies = 10
-@export var max_score = 10
+@export var max_score = 100
 var score
 var play_time = 0
 var ff_disable_mobs = false
