@@ -24,7 +24,7 @@ on:
 
 env:
   REGISTRY: forgejo.themongoose.xyz/brandon/
-  IMAGE_NAME: godot_tutorial
+  IMAGE_NAME: ludamdare55
 
 jobs:
   build-and-push-image:
@@ -36,6 +36,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          lfs: true
+      - name: Checkout LFS objects
+        run: git lfs checkout
 
       - name: Log in to the forgejo Container registry
         uses: docker/login-action@e92390c5fb421da1463c202d546fed0ec5c39f20

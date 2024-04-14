@@ -1,0 +1,52 @@
+[gd_scene load_steps=7 format=3 uid="uid://bq2q5tuxi67pt"]
+
+[ext_resource type="Script" path="res://possesable.gd" id="1_53smn"]
+[ext_resource type="Texture2D" uid="uid://dtj3mcbmlypyk" path="res://art/tilesheet.png" id="1_u8fpx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1kxnw"]
+atlas = ExtResource("1_u8fpx")
+region = Rect2(0, 300, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a8114"]
+atlas = ExtResource("1_u8fpx")
+region = Rect2(100, 300, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_10gmc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1kxnw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a8114")
+}],
+"loop": true,
+"name": &"possesed",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rxoi6"]
+radius = 31.0
+height = 74.0
+
+[node name="possesable" type="RigidBody2D" groups=["possesable"]]
+collision_layer = 4
+collision_mask = 2
+gravity_scale = 0.0
+max_contacts_reported = 50
+contact_monitor = true
+script = ExtResource("1_53smn")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_10gmc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_rxoi6")
+debug_color = Color(0, 0.584314, 0.776471, 0.419608)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
